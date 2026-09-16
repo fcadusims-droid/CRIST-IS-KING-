@@ -47,7 +47,7 @@ Carregar no navegador:
 | Item | Onde | Como preencher |
 |---|---|---|
 | Libs TF.js/NSFWJS | `vendor/` | `npm run setup` (gitignored) |
-| Modelo NSFWJS | `models/` | `npm run setup` ou download manual (gitignored) |
+| Modelo NSFWJS | `models/` | `npm run setup` — extraído do pacote nsfwjs (gitignored) |
 | Imagens de troca | `assets/jesus/` | adicionar + listar em `JESUS_IMAGES` |
 | Wordlist de texto | `data/wordlist.js` | preencher com termos inequívocos |
 | Calibração | opções | ajustar thresholds até falso positivo tolerável |
@@ -86,6 +86,29 @@ Mudanças feitas de propósito sobre o documento base, todas pequenas e sinaliza
 - **`options.js` usa `getElementById` explícito** no lugar de globais
   implícitos por `id`.
 - **Placeholders SVG** em `assets/jesus/` só para não dar 404 nos testes.
+- **Modelo extraído do pacote nsfwjs 4.x** (`scripts/extract-model.js`) — o
+  nsfwjs 4.x não distribui `model.json`/`.bin` soltos (empacota como `.min.js`);
+  o setup reconstrói o formato padrão do TF.js. O `offscreen.js` carrega a URL
+  do `model.json` (não o diretório, como o doc supunha para o nsfwjs 2.x) e cai
+  para o backend CPU se o WebGL não estiver disponível.
+
+## Testes
+
+Rodados neste repositório (harness em Node/Playwright, fora da árvore versionada):
+
+- `decideVerdict` (thresholds de bloqueio): 9/9.
+- **Carga do modelo + `classify()` num Chromium real**: PASS — bundle expõe
+  `nsfwjs.load`, `models/model.json` + `.bin` extraídos carregam e a
+  classificação retorna as 5 classes. Ressalva: no ambiente headless de teste o
+  backend caiu para CPU (sem WebGL); em Chrome real o WebGL é usado.
+- `content.js` (DOM: blur/troca de imagem, filtro de texto, cover de vídeo,
+  MutationObserver): 12/12.
+- `options.js` (trava por senha SHA-256, lock/unlock, persistência de
+  thresholds): 12/12.
+
+Não testado automatizadamente: carregar como extensão MV3 empacotada
+(service worker + offscreen reais) — isso exige um Chrome com WebGL e o fluxo
+completo `chrome://extensions`.
 
 Pontos ainda em aberto do próprio desenho (não corrigidos porque mudam
 comportamento — decisão sua):
