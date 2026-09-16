@@ -1,0 +1,7 @@
+img[data-red-pending] { filter: blur(24px) !important; transition: filter .2s; }
+img[data-red="blocked"] { filter: none !important; }
+.red-video-cover {
+  background-size: cover; background-position: center;
+  border-radius: 8px; min-width: 120px; min-height: 90px;
+  display: inline-block;
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Imagem de substituição — placeholder">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e3a5f"/>
+      <stop offset="1" stop-color="#0d1b2a"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#g1)"/>
+  <g fill="none" stroke="#f5d76e" stroke-width="6" stroke-linecap="round">
+    <line x1="200" y1="120" x2="200" y2="290"/>
+    <line x1="150" y1="175" x2="250" y2="175"/>
+  </g>
+  <circle cx="200" cy="90" r="26" fill="none" stroke="#f5d76e" stroke-width="6"/>
+  <text x="200" y="340" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#cbd5e1">Redemptio</text>
+  <text x="200" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#7f93a8">substitua por sua imagem</text>
+</svg>

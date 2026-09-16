@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Redemptio — Configurações</title>
+<style>
+  body { font-family: system-ui; max-width: 520px; margin: 24px auto; padding: 0 16px; }
+  label { display:block; margin: 10px 0; }
+  .row { margin: 12px 0; }
+  input[type=range] { width: 240px; }
+  button { padding: 8px 14px; cursor: pointer; }
+  #locked, #panel { display: none; }
+</style>
+</head>
+<body>
+  <h2>Redemptio</h2>
+
+  <div id="setup">
+    <p>Defina uma senha para proteger as configurações:</p>
+    <input id="newPass" type="password" placeholder="nova senha">
+    <button id="setPass">Definir senha</button>
+  </div>
+
+  <div id="locked">
+    <p>Configurações bloqueadas. Digite a senha:</p>
+    <input id="unlockPass" type="password" placeholder="senha">
+    <button id="unlock">Desbloquear</button>
+    <p id="err" style="color:#c00"></p>
+  </div>
+
+  <div id="panel">
+    <div class="row"><label><input type="checkbox" id="enabled"> Extensão ativa</label></div>
+    <div class="row"><label><input type="checkbox" id="blockImages"> Filtrar imagens</label></div>
+    <div class="row"><label><input type="checkbox" id="blockVideos"> Bloquear vídeos</label></div>
+    <div class="row"><label><input type="checkbox" id="blockText"> Filtrar texto</label></div>
+    <hr>
+    <div class="row">Sensibilidade "Porn": <input type="range" id="thPorn" min="0" max="100"> <span id="vPorn"></span></div>
+    <div class="row">Sensibilidade "Hentai": <input type="range" id="thHentai" min="0" max="100"> <span id="vHentai"></span></div>
+    <div class="row">Sensibilidade "Sexy": <input type="range" id="thSexy" min="0" max="100"> <span id="vSexy"></span></div>
+    <button id="save">Salvar</button>
+    <p id="saved" style="color:#080"></p>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

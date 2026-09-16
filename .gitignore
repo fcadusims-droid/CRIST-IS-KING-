@@ -1,0 +1,14 @@
+node_modules/
+package-lock.json
+
+# Binários de terceiros gerados pelo setup (não versionar)
+vendor/*
+!vendor/README.md
+
+# Arquivos do modelo (binários grandes) — obter via setup / download
+models/*
+!models/README.md
+
+# Sistema
+.DS_Store
+*.log
