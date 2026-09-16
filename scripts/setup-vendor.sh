@@ -43,18 +43,13 @@ else
   echo "ok  vendor/nsfwjs.min.js (esbuild)"
 fi
 
-# --- 3. Modelo NSFWJS (model.json + shards) ----------------------------------
-# Tenta localizar os arquivos do modelo dentro de node_modules/nsfwjs.
-MODEL_JSON="$(find node_modules/nsfwjs -name 'model.json' 2>/dev/null | head -1 || true)"
-if [ -n "$MODEL_JSON" ]; then
-  MODEL_DIR="$(dirname "$MODEL_JSON")"
-  cp "$MODEL_DIR"/model.json models/
-  cp "$MODEL_DIR"/*.bin models/ 2>/dev/null || true
-  echo "ok  models/ (copiado de $MODEL_DIR)"
+# --- 3. Modelo NSFWJS (model.json + shard .bin) ------------------------------
+# O nsfwjs 4.x empacota o modelo como módulos .min.js (não model.json/.bin
+# soltos). extract-model.js reconstrói o formato padrão do TF.js em models/.
+if node scripts/extract-model.js; then
+  :
 else
-  echo "!! model.json não encontrado em node_modules/nsfwjs."
-  echo "   Baixe manualmente do repositório oficial do NSFWJS para models/."
-  echo "   (ver models/README.md)"
+  echo "!! extração do modelo falhou — ver scripts/extract-model.js e models/README.md" >&2
 fi
 
 echo "Setup concluído. Recarregue a extensão em chrome://extensions."
